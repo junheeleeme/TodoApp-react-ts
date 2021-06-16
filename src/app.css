@@ -1,0 +1,97 @@
+@charset "utf-8";
+
+*{
+    box-sizing: border-box;
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+	margin: 0;	
+	background: #654ea3; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to left, #654ea3, #ffcfdf); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to left, #654ea3, #ffcfdf); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+canvas {
+	display: block;
+}
+
+#particles-js {
+	position: relative;
+	width: 100%;
+	height: 100%;
+    z-index: -9999;
+}
+
+#root{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px;
+    height: 650px;
+    border-radius: 5px;
+    background-color: #fff;
+    z-index: 999;
+}
+
+.todo_main{
+    width: 100%;
+    height: 100%;
+}
+
+.todo_insert{
+    position: relative;
+    padding: 30px;
+    height: 95px;
+}
+
+.todo_insert>input[type='text']{
+    width: 320px;
+    padding: 6px 7px;
+    font-size: 16px;
+    border: 1px solid #000;
+    border-radius: 3px;
+    outline: 0;    
+    vertical-align: middle;
+}
+
+.todo_insert>button{
+    width: 36px;
+    height: 36px;
+    margin: 0 0 0 25px;
+    border-radius: 50%;
+    font-size: 30px;
+    color: #fff;
+    background-color: gray;
+    border: none;
+    vertical-align: middle;
+    outline: 0;
+}
+
+.todo_list{
+    height: calc(100% - 95px);
+    border-top: 1px solid #E1E5EA;
+    overflow: scroll;
+}
+
+.todo_list>li{
+    position: relative;
+    padding: 15px;
+    border-bottom: 1px solid #E1E5EA;
+}
+
+.todo_date{
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    font-size: 10px;
+}
+
+.done{
+    text-decoration:  line-through;
+}
