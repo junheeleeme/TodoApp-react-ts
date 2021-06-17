@@ -20,12 +20,16 @@ module.exports = {
             test: /\.jsx?/, // 대상 설정 정규식
             loader: 'babel-loader',
             options: {
-                presets: ['@babel/preset-env', '@babel/preset-react'],
-            },
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+        },
         },
         { //style-loader, css-loader 규칙 설정
             test: /\.css$/i,
             use: ['style-loader', 'css-loader'],
+        },
+        {
+            test: /\.(png|jpg)$/,
+            use: ["file-loader"]
         }],
     },
     devServer : {

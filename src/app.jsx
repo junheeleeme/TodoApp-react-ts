@@ -1,11 +1,11 @@
 const React = require("react");
-const Todo_Insert = require("./components/Todo_Add");
+const Todo_Logo = require("./components/Todo_Logo");
+const Todo_Add = require("./components/Todo_Add");
 const Todo_List = require("./components/Todo_List");
 const {useState, useEffect} = React;
 
 const App = () =>{
-    const [todos, setTodos] = useState(
-        [
+    const [todos, setTodos] = useState([]);
             // {   
             //     title : '공부하기',
             //     date : '2021-06-16',
@@ -18,28 +18,46 @@ const App = () =>{
             //     done : 'done',
             //     edit : 'edit'
             // }
-        ]
-    )
     
-    const AddTodo = (todo) =>{
-        setTodos([
-            ...todos,
-            {
+    const todo_add = (todo) =>{
+
+        const temp = {
                 title : todo,
                 date : getDate(),
                 done : 'yet',
-                edit : '',
-            }
+        };
+
+        setTodos([
+            ...todos,
+            temp
         ]);
+
+    }
+    
+    const todo_delete = (idx) =>{
+
+        const temp = [...todos];
+        temp.splice(idx, 1);
+        setTodos([...temp]);
+    
+    }
+    
+    const todo_edit = (idx, todo) => {
+        
+        const temp = [...todos];
+        temp[idx].title = todo;
+        temp[idx].date = getDate();
+
+        setTodos([...temp]);
     }
 
     const doneToggle = (idx) =>{
 
-        let temp = [...todos];
+        const temp = [...todos];
     
         temp.forEach( (todo, i) =>{
             
-            if( i === parseInt(idx)){
+            if( i === idx){
                 if(todo.done === 'yet'){
                     todo.done = 'done';
                 }else{
@@ -49,7 +67,6 @@ const App = () =>{
         })
         setTodos([...temp]);
     }
-
 
     const getDate = () => { //날짜 시간 구하기
         const time = new Date() 
@@ -61,10 +78,12 @@ const App = () =>{
         return todo_Date;
     }
 
+
     return(
         <main className="todo_main">
-            <Todo_Insert AddTodo={AddTodo}/>
-            <Todo_List todos={todos} doneToggle={doneToggle}/>
+            <Todo_Logo/>
+            <Todo_Add todo_add={todo_add}/>
+            <Todo_List todos={todos} doneToggle={doneToggle} todo_edit={todo_edit} todo_delete={todo_delete}/>
         </main>
     )
 }

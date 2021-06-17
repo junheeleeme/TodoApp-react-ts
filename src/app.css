@@ -34,9 +34,29 @@ canvas {
     transform: translate(-50%, -50%);
     width: 450px;
     height: 650px;
-    border-radius: 5px;
+    border-radius: 7px;
     background-color: #fff;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     z-index: 999;
+}
+
+.todo_header{
+    position: relative;
+    height: 50px;
+    background-color: #CADEFC;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+.todo_header>h1{
+    position: absolute;
+    top: 53%; left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    font-size: 27px;
+    color: #F6F6F6;
 }
 
 .todo_main{
@@ -44,33 +64,38 @@ canvas {
     height: 100%;
 }
 
-.todo_insert{
+.todo_add{
     position: relative;
     padding: 30px;
     height: 95px;
 }
 
-.todo_insert>input[type='text']{
+.todo_add>input[type='text']{
     width: 320px;
     padding: 6px 7px;
     font-size: 16px;
-    border: 1px solid #000;
+    border: 1px solid #B9BBDF;
     border-radius: 3px;
     outline: 0;    
     vertical-align: middle;
 }
 
-.todo_insert>button{
+.todo_add>button{
     width: 36px;
     height: 36px;
-    margin: 0 0 0 25px;
+    margin: 0 0 0 30px;
     border-radius: 50%;
     font-size: 30px;
     color: #fff;
-    background-color: gray;
+    background-color: #F6C6EA;
     border: none;
     vertical-align: middle;
     outline: 0;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.todo_add>button:hover{
+    background-color: #C490E4;
 }
 
 .todo_list{
@@ -81,8 +106,39 @@ canvas {
 
 .todo_list>li{
     position: relative;
-    padding: 15px;
+    padding: 16px 0 14px 42px;
+    font-size: 16px;
     border-bottom: 1px solid #E1E5EA;
+    cursor: pointer;
+}
+
+.todo_list>li:hover .todo_date{
+    opacity: 0;
+}
+
+.todo_list>li:after{
+    content: '';
+    position: absolute;
+    top: 50%; left: 15px;
+    transform : translate(0, -50%);
+    width: 15px;
+    height: 15px;
+    border: 1px solid #9896F1;
+}
+
+.todo_list>li:before{
+    content: '';
+    position: absolute;
+    top: 50%; left: 18px;
+    transform : translate(0, -50%);
+    width: 11px;
+    height: 11px;
+    background-color: #fff;
+    transition:0.3s ease;
+}
+
+.todo_list>li.done:before{
+    background-color: #9896F1;
 }
 
 .todo_date{
@@ -90,8 +146,58 @@ canvas {
     bottom: 3px;
     right: 3px;
     font-size: 10px;
+    opacity: 1;
+    transition: 0.3s ease;
 }
 
 .done{
-    text-decoration:  line-through;
+    text-decoration: line-through;
 }
+
+.edit_btn{
+    position: absolute;
+    top: 50%; right: 50px;
+    transform: translate(0, -50%);
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    transition: 0.3s ease;
+    opacity: 0;
+    z-index: -9999;
+    background: url('../src/image/edit.png') no-repeat center / 80%;
+}
+
+.del_btn{
+    position: absolute;
+    top: 50%; right: 15px;
+    transform: translate(0, -50%);
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    transition: 0.3s ease;
+    opacity: 0;
+    z-index: -9999;
+    background: url('../src/image/delete.png') no-repeat center / 85%;  
+}
+
+.todo_list>li:hover .edit_btn, .todo_list>li:hover .del_btn{
+    opacity: 1;
+    z-index: 1;    
+}
+
+.todo_edit{
+    display: none;
+    position: absolute;
+    top: 50%; left: 40px;
+    transform: translate(0, -50%);
+    width: 300px;
+    padding: 4px 6px;
+    font-size: 16px;
+    border: 1px solid #B9BBDF;
+    border-radius: 3px;
+    outline: 0;    
+}
+
+.edit .todo_edit{
+    display: block;
+} 
