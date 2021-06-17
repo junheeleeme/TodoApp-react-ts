@@ -2,6 +2,7 @@
 
 *{
     box-sizing: border-box;
+    user-select: none;
 }
 
 ul{
@@ -34,7 +35,7 @@ canvas {
     transform: translate(-50%, -50%);
     width: 450px;
     height: 650px;
-    border-radius: 7px;
+    border-radius: 8px;
     background-color: #fff;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     z-index: 999;
@@ -44,8 +45,8 @@ canvas {
     position: relative;
     height: 50px;
     background-color: #CADEFC;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .todo_header>h1{
@@ -56,7 +57,7 @@ canvas {
     padding: 0;
     margin: 0;
     font-size: 27px;
-    color: #F6F6F6;
+    color: #374045;
 }
 
 .todo_main{
@@ -99,8 +100,8 @@ canvas {
 }
 
 .todo_list{
-    height: calc(100% - 95px);
-    border-top: 1px solid #E1E5EA;
+    height: calc(100% - 148px);
+    border-top: 1px solid #E8E8E8;
     overflow: scroll;
 }
 

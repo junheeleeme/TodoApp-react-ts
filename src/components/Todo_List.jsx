@@ -31,9 +31,10 @@ const Todo_List = ({todos, doneToggle, todo_edit, todo_delete}) =>{
             edit_txt.current.focus();
         }else{
             list_li.current.classList.remove('edit');
-            todo_edit(idx, edit);
+            if(!(edit_txt.current.value === '')){
+                todo_edit(idx, edit);
+            }
         }
-        
     }
     
     const onChange_edit = (e) =>{
@@ -42,9 +43,13 @@ const Todo_List = ({todos, doneToggle, todo_edit, todo_delete}) =>{
 
     const onKeyPress_edit = (e) =>{
         if(e.charCode === 13){
-            const idx = parseInt(e.target.parentElement.getAttribute('data-sort'));
-            list_li.current.classList.remove('edit');
-            todo_edit(idx, edit);
+            if(!(edit_txt.current.value === '')){
+                const idx = parseInt(e.target.parentElement.getAttribute('data-sort'));
+                list_li.current.classList.remove('edit');
+                todo_edit(idx, edit);                
+            }else{
+                list_li.current.classList.remove('edit');
+            }
         }
     }
 
