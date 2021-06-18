@@ -3,8 +3,7 @@ const {useState, useRef} = React;
 
 const Todo_List = ({todos, doneToggle, todo_edit, todo_delete}) =>{
     const [edit, setEdit] = useState('');
-    const edit_txt = useRef();
-
+    const todo_list = useRef();
     const list_li = useRef();
 
     const onClick_del = (e) => {
@@ -22,17 +21,22 @@ const Todo_List = ({todos, doneToggle, todo_edit, todo_delete}) =>{
     const onClick_edit = (e) =>{
         e.preventDefault();
         e.stopPropagation();
-        const idx = parseInt(e.target.parentElement.getAttribute('data-sort'));
-        const isClass = list_li.current.classList.contains('edit');
         
+        const idx = parseInt(e.target.parentElement.getAttribute('data-sort'));
+        const select_li = todo_list.current.children[idx];
+        const isClass = select_li.classList.contains('edit');
+        const edit_input = select_li.children[1];
+
         if(!isClass){
-            list_li.current.classList.add('edit');
-            edit_txt.current.value = '';
-            edit_txt.current.focus();
+            select_li.classList.add('edit');
+            edit_input.value = '';
+            edit_input.focus();
         }else{
-            list_li.current.classList.remove('edit');
-            if(!(edit_txt.current.value === '')){
+            if(edit_input.value !== ''){
                 todo_edit(idx, edit);
+                select_li.classList.remove('edit');
+            }else{
+                select_li.classList.remove('edit');
             }
         }
     }
@@ -43,12 +47,18 @@ const Todo_List = ({todos, doneToggle, todo_edit, todo_delete}) =>{
 
     const onKeyPress_edit = (e) =>{
         if(e.charCode === 13){
-            if(!(edit_txt.current.value === '')){
-                const idx = parseInt(e.target.parentElement.getAttribute('data-sort'));
-                list_li.current.classList.remove('edit');
-                todo_edit(idx, edit);                
+            
+            const idx = parseInt(e.target.parentElement.getAttribute('data-sort'));
+            const select_li = todo_list.current.children[idx];
+            const edit_input = select_li.children[1];
+            const isClass = select_li.classList.contains('edit');
+    
+            if(edit_input.value !== ''){
+                todo_edit(idx, edit);
+                edit_input.value = '';   
+                select_li.classList.remove('edit');
             }else{
-                list_li.current.classList.remove('edit');
+                select_li.classList.remove('edit');
             }
         }
     }
@@ -57,9 +67,9 @@ const Todo_List = ({todos, doneToggle, todo_edit, todo_delete}) =>{
 
     todos.forEach( (todo, i) => {
         list.push(
-            <li ref={list_li} key={i} data-sort={i} className={todo.done} onClick={toggle}>
-                {todo.title}
-                <input ref={edit_txt} type="text" className="todo_edit" onChange={onChange_edit} onKeyPress={onKeyPress_edit}/>
+            <li key={i} data-sort={i} className={todo.done} onClick={toggle}>
+                <p className="todo_title">{todo.title}</p>
+                <input type="text" className="todo_edit" onChange={onChange_edit} onKeyPress={onKeyPress_edit}/>
                 <a href="#" className='edit_btn' onClick={onClick_edit}></a>
                 <a href="#" className='del_btn' onClick={onClick_del}></a>
                 <span className="todo_date">{todo.date}</span>
@@ -70,7 +80,7 @@ const Todo_List = ({todos, doneToggle, todo_edit, todo_delete}) =>{
 
     return(
         <React.Fragment>
-            <ul className="todo_list">
+            <ul ref={todo_list} className="todo_list">
                 {list}
             </ul>
         </React.Fragment>

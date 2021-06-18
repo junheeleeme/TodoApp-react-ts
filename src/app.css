@@ -142,10 +142,17 @@ canvas {
     background-color: #9896F1;
 }
 
+.todo_title{
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 80%;
+}
+
 .todo_date{
     position: absolute;
     bottom: 3px;
-    right: 3px;
+    right: 7px;
     font-size: 10px;
     opacity: 1;
     transition: 0.3s ease;
