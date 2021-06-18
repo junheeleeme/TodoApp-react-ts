@@ -13,9 +13,9 @@ ul{
 
 body {
 	margin: 0;	
-	background: #654ea3; /* fallback for old browsers */
-	background: -webkit-linear-gradient(to left, #654ea3, #ffcfdf); /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to left, #654ea3, #ffcfdf); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: #bdc3c7;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #2c3e50, #bdc3c7);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 canvas {
 	display: block;
@@ -45,7 +45,7 @@ canvas {
 .todo_header{
     position: relative;
     height: 50px;
-    background-color: #CADEFC;
+    background-color: #DBE2EF;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
@@ -90,7 +90,7 @@ canvas {
     border-radius: 50%;
     font-size: 25px;
     color: #fff;
-    background-color: #F6C6EA;
+    background-color: #CADEFC;
     border: none;
     vertical-align: top;
     outline: 0;
@@ -98,7 +98,7 @@ canvas {
     transition: 0.3s ease;
 }
 .todo_add>button:hover{
-    background-color: #C490E4;
+    background-color: #364F6B;
 }
 
 .todo_list{
@@ -120,7 +120,7 @@ canvas {
 }
 
 .done{
-    background: #F4EEFF !important;
+    background: #e4e9f2 !important;
 }
 
 .todo_list>li:hover .todo_date{
