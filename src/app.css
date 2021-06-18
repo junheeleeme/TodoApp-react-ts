@@ -22,6 +22,7 @@ canvas {
 }
 
 #particles-js {
+    display: block;
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -107,7 +108,7 @@ canvas {
 
 .todo_list>li{
     position: relative;
-    padding: 16px 0 14px 42px;
+    height: 45px;
     font-size: 16px;
     border-bottom: 1px solid #E1E5EA;
     cursor: pointer;
@@ -144,9 +145,13 @@ canvas {
 
 .todo_title{
     display: inline-block;
+    padding: 14px 5px 14px 45px;
     margin: 0;
-    padding: 0;
     width: 80%;
+    height: 100%;
+    overflow:hidden; 
+    text-overflow:ellipsis; 
+    white-space:nowrap;
 }
 
 .todo_date{
@@ -209,3 +214,38 @@ canvas {
 .edit .todo_edit{
     display: block;
 } 
+
+@media screen and (max-width: 450px) {
+
+    #root{
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0px;
+        background-color: #fff;
+        z-index: 999;
+    }
+
+    .todo_add {
+        position: relative;
+        padding: 5%;
+        height: auto;
+    }
+
+    .todo_add>input[type='text']{
+        width: 80%;
+        padding: 6px 7px;
+        font-size: 16px;
+        border: 1px solid #B9BBDF;
+        border-radius: 3px;
+        outline: 0;    
+        vertical-align: middle;
+    }
+    .todo_add>button{
+        margin: 0 0 0 7%;
+    }
+
+}

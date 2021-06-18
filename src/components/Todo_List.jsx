@@ -14,7 +14,7 @@ const Todo_List = ({todos, doneToggle, todo_edit, todo_delete}) =>{
     }
 
     const toggle = (e) =>{
-        const idx = parseInt(e.target.getAttribute('data-sort'));
+        const idx = parseInt(e.target.parentElement.getAttribute('data-sort'));
         doneToggle(idx);
     }
 
@@ -67,8 +67,8 @@ const Todo_List = ({todos, doneToggle, todo_edit, todo_delete}) =>{
 
     todos.forEach( (todo, i) => {
         list.push(
-            <li key={i} data-sort={i} className={todo.done} onClick={toggle}>
-                <p className="todo_title">{todo.title}</p>
+            <li key={i} data-sort={i} className={todo.done}>
+                <p className="todo_title" onClick={toggle}>{todo.title}</p>
                 <input type="text" className="todo_edit" onChange={onChange_edit} onKeyPress={onKeyPress_edit}/>
                 <a href="#" className='edit_btn' onClick={onClick_edit}></a>
                 <a href="#" className='del_btn' onClick={onClick_del}></a>
