@@ -18,7 +18,7 @@ const Todo_Add = ({todo_add}) =>{
             input_txt.current.value = '';
             input_txt.current.focus();
         }       
-            
+
     }
 
     return(
