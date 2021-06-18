@@ -34,8 +34,8 @@ canvas {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 450px;
-    height: 650px;
+    width: 400px;
+    height: 600px;
     border-radius: 8px;
     background-color: #fff;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
@@ -57,7 +57,7 @@ canvas {
     display: inline-block;
     padding: 0;
     margin: 0;
-    font-size: 27px;
+    font-size: 23px;
     color: #374045;
 }
 
@@ -68,30 +68,31 @@ canvas {
 
 .todo_add{
     position: relative;
-    padding: 30px;
-    height: 95px;
+    padding: 20px;
+    height: 70px;
 }
 
 .todo_add>input[type='text']{
-    width: 320px;
-    padding: 6px 7px;
+    width: 83%;
+    height: 30px;
+    padding: 2px 0 0 5px;
     font-size: 16px;
     border: 1px solid #B9BBDF;
     border-radius: 3px;
     outline: 0;    
-    vertical-align: middle;
+    vertical-align: top;
 }
 
 .todo_add>button{
-    width: 36px;
-    height: 36px;
-    margin: 0 0 0 30px;
+    width: 32px;
+    height: 32px;
+    margin: 0 0 0 5.5%;
     border-radius: 50%;
-    font-size: 30px;
+    font-size: 25px;
     color: #fff;
     background-color: #F6C6EA;
     border: none;
-    vertical-align: middle;
+    vertical-align: top;
     outline: 0;
     cursor: pointer;
     transition: 0.3s ease;
@@ -101,7 +102,7 @@ canvas {
 }
 
 .todo_list{
-    height: calc(100% - 148px);
+    height: calc(100% - 122px);
     border-top: 1px solid #E8E8E8;
     overflow: scroll;
 }
@@ -112,6 +113,14 @@ canvas {
     font-size: 16px;
     border-bottom: 1px solid #E1E5EA;
     cursor: pointer;
+}
+
+.todo_list>li:hover{
+    background: #EEEEEE;
+}
+
+.done{
+    background: #F4EEFF !important;
 }
 
 .todo_list>li:hover .todo_date{
@@ -174,9 +183,8 @@ canvas {
     width: 30px;
     height: 30px;
     display: inline-block;
-    transition: 0.3s ease;
+    transition: 0.2s ease;
     opacity: 0;
-    z-index: -9999;
     background: url('../src/image/edit.png') no-repeat center / 80%;
 }
 
@@ -187,9 +195,8 @@ canvas {
     width: 30px;
     height: 30px;
     display: inline-block;
-    transition: 0.3s ease;
+    transition: 0.2s ease;
     opacity: 0;
-    z-index: -9999;
     background: url('../src/image/delete.png') no-repeat center / 85%;  
 }
 
@@ -203,8 +210,9 @@ canvas {
     position: absolute;
     top: 50%; left: 40px;
     transform: translate(0, -50%);
-    width: 300px;
-    padding: 4px 6px;
+    width: 68%;
+    height: 30px;
+    padding: 3px 0 0 5px;
     font-size: 16px;
     border: 1px solid #B9BBDF;
     border-radius: 3px;

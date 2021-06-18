@@ -21,11 +21,18 @@ const Todo_List = ({todos, doneToggle, todo_edit, todo_delete}) =>{
     const onClick_edit = (e) =>{
         e.preventDefault();
         e.stopPropagation();
-        
+
         const idx = parseInt(e.target.parentElement.getAttribute('data-sort'));
         const select_li = todo_list.current.children[idx];
         const isClass = select_li.classList.contains('edit');
         const edit_input = select_li.children[1];
+        const length = todo_list.current.children.length;
+
+        for(let i=0 ; i<length ; i++){
+            if(i!==idx){
+                todo_list.current.children[i].classList.remove('edit');
+            }
+        }
 
         if(!isClass){
             select_li.classList.add('edit');
