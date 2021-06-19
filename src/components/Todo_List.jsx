@@ -53,8 +53,8 @@ const Todo_List = ({todos, doneToggle, todo_edit, todo_delete}) =>{
     }
 
     const onKeyPress_edit = (e) =>{
+        
         if(e.charCode === 13){
-            
             const idx = parseInt(e.target.parentElement.getAttribute('data-sort'));
             const select_li = todo_list.current.children[idx];
             const edit_input = select_li.children[1];

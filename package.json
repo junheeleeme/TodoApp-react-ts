@@ -1,11 +1,12 @@
 {
-  "name": "TodoApp",
+  "name": "Todo List",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx webpack",
-    "dev": "webpack serve"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "./node_modules/.bin/webpack-dev-server",
+    "dev": "npx webpack serve"
   },
   "keywords": [],
   "author": "",

@@ -12,8 +12,9 @@ module.exports = {
         app : ['./src/index.jsx'], 
     },
     output:{// 최종적으로 만들어질 js
-        path: path.join(__dirname, '/dist'), //빌드 위치
-        filename : 'app.js'  //웹팩 빌드 후 최종적으로 만들어질 파일
+        path: path.join(__dirname, '/dist/'), //빌드 위치
+        filename : 'app.js',  //웹팩 빌드 후 최종적으로 만들어질 파일
+        publicPath: '/dist/',
     },
     module : { //모듈 연결 설정
         rules : [{
@@ -21,7 +22,10 @@ module.exports = {
             loader: 'babel-loader',
             options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
-        },
+            plugins : [ '@babel/plugin-proposal-class-properties', // 이 부분!! 
+            
+            'react-hot-loader/babel', ]
+            },
         },
         { //style-loader, css-loader 규칙 설정
             test: /\.css$/i,
@@ -33,6 +37,8 @@ module.exports = {
         }],
     },
     devServer : {
+        compress: true,
+        hot : true,
         port: 9000,
     },
     plugins: [
@@ -41,4 +47,5 @@ module.exports = {
             template: './public/todo.html',
         }),
     ],
+    
 }
