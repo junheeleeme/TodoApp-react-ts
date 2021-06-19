@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-    name : 'TodoApp_webpack_setting', // 웹팩 설정 이름
+    name : 'TodoList_webpack_setting', // 웹팩 설정 이름
     mode : 'development', //실서비스 : Production
     devtool : 'eval',
     resolve : {

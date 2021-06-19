@@ -1,7 +1,9 @@
 const React = require("react");
-const {useState, useRef} = React;
+const { useState, useRef } = React;
+const { memo } = require("react");
 
-const Todo_List = ({todos, doneToggle, todo_edit, todo_delete}) =>{
+const Todo_List = memo( ({todos, doneToggle, todo_edit, todo_delete}) => {
+
     const [edit, setEdit] = useState('');
     const todo_list = useRef();
     const list_li = useRef();
@@ -93,6 +95,6 @@ const Todo_List = ({todos, doneToggle, todo_edit, todo_delete}) =>{
         </React.Fragment>
     );
 
-}
+})
 
 module.exports = Todo_List;

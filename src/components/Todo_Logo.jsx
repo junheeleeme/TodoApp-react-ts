@@ -1,11 +1,7 @@
 const React = require("react");
+const { memo } = require("react");
 
-
-const Todo_Logo = () =>{
-
-
-
-
+const Todo_Logo = memo( ()=> {
 
     return(
         <React.Fragment>
@@ -14,7 +10,8 @@ const Todo_Logo = () =>{
             </div>
         </React.Fragment>
     );
-}
+
+})
 
 
 module.exports = Todo_Logo;

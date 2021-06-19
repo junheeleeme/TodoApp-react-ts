@@ -1,7 +1,8 @@
 const React = require("react");
 const {useState, useRef} = React;
+const { memo } = require("react");
 
-const Todo_Add = ({todo_add}) =>{
+const Todo_Add = memo(({todo_add}) =>{
     const [Todo, setTodo] = useState('insert');
     const input_txt = useRef();
 
@@ -29,6 +30,6 @@ const Todo_Add = ({todo_add}) =>{
             </form>
         </React.Fragment>
     );
-}
+})
 
 module.exports = Todo_Add;
