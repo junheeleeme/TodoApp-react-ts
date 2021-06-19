@@ -12,9 +12,9 @@ module.exports = {
         app : ['./src/index.jsx'], 
     },
     output:{// 최종적으로 만들어질 js
-        path: path.join(__dirname, '/dist/'), //빌드 위치
+        path: path.join(__dirname, '/dist'), //빌드 위치
         filename : 'app.js',  //웹팩 빌드 후 최종적으로 만들어질 파일
-        publicPath: '/dist/',
+        publicPath: '../dist/',
     },
     module : { //모듈 연결 설정
         rules : [{
@@ -44,7 +44,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             // index.html 템플릿을 기반으로 빌드 결과물을 추가해줌
-            template: './public/todo.html',
+            template: './dist/index.html',
         }),
     ],
     

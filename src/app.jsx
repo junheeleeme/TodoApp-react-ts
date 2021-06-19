@@ -1,5 +1,6 @@
 
 const React = require("react");
+const { memo } = require("react");
 const Todo_Logo = require("./components/Todo_Logo");
 const Todo_Add = require("./components/Todo_Add");
 const Todo_List = require("./components/Todo_List");

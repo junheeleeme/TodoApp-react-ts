@@ -3,7 +3,7 @@ const {useState, useRef} = React;
 const { memo } = require("react");
 
 const Todo_Add = memo(({todo_add}) =>{
-    const [Todo, setTodo] = useState('insert');
+    const [Todo, setTodo] = useState('');
     const input_txt = useRef();
 
     onchange_input = (e) => {
@@ -11,7 +11,9 @@ const Todo_Add = memo(({todo_add}) =>{
     } 
 
     onSubmit_todo = (e) =>{
+
         e.preventDefault();
+        
         const val = input_txt.current.value;
 
         if( !(val === '') ){
@@ -24,9 +26,9 @@ const Todo_Add = memo(({todo_add}) =>{
 
     return(
         <React.Fragment>
-            <form action="" className="todo_add">
+            <form className="todo_add">
                 <input type="text" className="todo_input" onChange={onchange_input} ref={input_txt}/>
-                <button className="insert_btn" onClick={onSubmit_todo} onSubmit={onSubmit_todo}>+</button>
+                <button className="insert_btn" onSubmit={onSubmit_todo} onClick={onSubmit_todo}>+</button>
             </form>
         </React.Fragment>
     );
