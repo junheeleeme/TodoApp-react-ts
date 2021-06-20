@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "./node_modules/.bin/webpack-dev-server",
-    "dev": "npx webpack serve"
+    "dev": "npx webpack",
+    "start": "webpack serve --open"
   },
   "keywords": [],
-  "author": "",
+  "author": "juni_official",
   "license": "ISC",
   "dependencies": {
     "react": "^17.0.2",
@@ -20,13 +20,14 @@
     "@babel/plugin-proposal-class-properties": "^7.14.5",
     "@babel/preset-env": "^7.14.5",
     "@babel/preset-react": "^7.14.5",
+    "@hot-loader/react-dom": "^17.0.1",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.6",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.1",
     "react-hot-loader": "^4.13.0",
     "style-loader": "^2.0.0",
-    "webpack": "^5.39.0",
+    "webpack": "^5.39.1",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2"
   }

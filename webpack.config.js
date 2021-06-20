@@ -13,8 +13,8 @@ module.exports = {
     },
     output:{// 최종적으로 만들어질 js
         path: path.join(__dirname, '/dist'), //빌드 위치
-        filename : 'app.js',  //웹팩 빌드 후 최종적으로 만들어질 파일
-        publicPath: '../dist/',
+        filename : 'bundle.js',  //웹팩 빌드 후 최종적으로 만들어질 파일
+        publicPath: './', //서버 배포했을때 필요
     },
     module : { //모듈 연결 설정
         rules : [{
@@ -22,9 +22,7 @@ module.exports = {
             loader: 'babel-loader',
             options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
-            plugins : [ '@babel/plugin-proposal-class-properties', // 이 부분!! 
-            
-            'react-hot-loader/babel', ]
+            plugins : [ '@babel/plugin-proposal-class-properties']
             },
         },
         { //style-loader, css-loader 규칙 설정
@@ -32,20 +30,24 @@ module.exports = {
             use: ['style-loader', 'css-loader'],
         },
         {
-            test: /\.(png|jpg)$/,
-            use: ["file-loader"]
-        }],
+            test: /\.(png|jpe?g|gif)$/i,
+            loader: 'file-loader',
+            options: {
+                name: 'imgs/[name].[ext]', //이미지는 img폴더 따로 생성해서 저장
+            },
+        }]
     },
     devServer : {
         compress: true,
+        contentBase: './dist',
         hot : true,
         port: 9000,
     },
     plugins: [
         new HtmlWebpackPlugin({
             // index.html 템플릿을 기반으로 빌드 결과물을 추가해줌
-            template: './dist/index.html',
-        }),
+            template: './public/index.html', // select not bundled html
+            filename:'./index.html'
+        })
     ],
-    
 }

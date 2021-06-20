@@ -87,7 +87,7 @@ canvas {
     width: 32px;
     height: 32px;
     margin: 0 0 0 5.5%;
-    border-radius: 50%;
+    border-radius: 16px;
     font-size: 25px;
     color: #fff;
     background-color: #CADEFC;
@@ -97,6 +97,7 @@ canvas {
     cursor: pointer;
     transition: 0.3s ease;
 }
+
 .todo_add>button:hover{
     background-color: #364F6B;
 }
@@ -254,6 +255,7 @@ canvas {
     }
     .todo_add>button{
         margin: 0 0 0 7%;
+        border-radius: 50%;
     }
 
 }

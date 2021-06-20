@@ -74,18 +74,17 @@ const Todo_List = memo( ({todos, doneToggle, todo_edit, todo_delete}) => {
 
     let list = [];
 
-    todos.forEach( (todo, i) => {
+    Object.keys(todos).forEach( (i) => {
         list.push(
-            <li key={i} data-sort={i} className={todo.done}>
-                <p className="todo_title" onClick={toggle}>{todo.title}</p>
+            <li key={i} data-sort={i} className={todos[i].done}>
+                <p className="todo_title" onClick={toggle}>{todos[i].title}</p>
                 <input type="text" className="todo_edit" onChange={onChange_edit} onKeyPress={onKeyPress_edit}/>
                 <a href="#" className='edit_btn' onClick={onClick_edit}></a>
                 <a href="#" className='del_btn' onClick={onClick_del}></a>
-                <span className="todo_date">{todo.date}</span>
+                <span className="todo_date">{todos[i].date}</span>
             </li>
         )
     });
-
 
     return(
         <React.Fragment>

@@ -1,26 +1,31 @@
-
 const React = require("react");
-const { memo } = require("react");
 const Todo_Logo = require("./components/Todo_Logo");
 const Todo_Add = require("./components/Todo_Add");
 const Todo_List = require("./components/Todo_List");
 const {useState, useEffect} = React;
+const { memo } = require("react");
 
 const App = () =>{
+
     const [todos, setTodos] = useState([]);
+    
             // {   
             //     title : '공부하기',
             //     date : '2021-06-16',
             //     done : 'yet',
             //     edit : '',
             // },
-            // {
-            //     title : '운동하기',
-            //     date : '2021-06-16',
-            //     done : 'done',
-            //     edit : 'edit'
-            // }
+
+    useEffect( ()=>{ //처음 실행시 로컬스토리지 체크
+        const local_data = localStorage.getItem('todo') !== null ? JSON.parse(localStorage.getItem('todo')) : [];
+        setTodos(local_data);
+    }, []) //<- ComponentDidMount
+
+    useEffect( () =>{ //sideEffect todos 데이터 감시
+        localStorage.setItem("todo", JSON.stringify(todos));
+    }, [todos]) 
     
+
     const todo_add = (todo) =>{
 
         const temp = {
@@ -28,7 +33,7 @@ const App = () =>{
                 date : getDate(),
                 done : 'yet',
         };
-
+        
         setTodos([
             ...todos,
             temp
@@ -39,9 +44,10 @@ const App = () =>{
     const todo_delete = (idx) =>{
 
         const temp = [...todos];
-        temp.splice(idx, 1);
+        temp.splice(idx, 1); //해당 배열 인덱스 제거
+        
         setTodos([...temp]);
-    
+
     }
     
     const todo_edit = (idx, todo) => {
@@ -51,6 +57,7 @@ const App = () =>{
         temp[idx].date = getDate();
 
         setTodos([...temp]);
+
     }
 
     const doneToggle = (idx) =>{
@@ -67,7 +74,9 @@ const App = () =>{
                 }
             }
         })
+        
         setTodos([...temp]);
+
     }
 
     const getDate = () => { //날짜 시간 구하기
@@ -79,7 +88,6 @@ const App = () =>{
 
         return todo_Date;
     }
-
 
     return(
         <main className="todo_main">
