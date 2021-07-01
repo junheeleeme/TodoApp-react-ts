@@ -83,23 +83,23 @@ canvas {
     vertical-align: top;
 }
 
-.todo_add>button{
+.insert_btn{
     width: 32px;
     height: 32px;
-    margin: 0 0 0 5.5%;
-    border-radius: 16px;
+    margin-left: 7%;
+    border-radius: 50%;
     font-size: 25px;
     color: #fff;
-    background-color: #CADEFC;
     border: none;
-    vertical-align: top;
     outline: 0;
     cursor: pointer;
     transition: 0.3s ease;
+    background-color: #CADEFC;
+    background: url('../src/image/plus.png') no-repeat center / 50%, #EDF6E5;
 }
 
 .todo_add>button:hover{
-    background-color: #364F6B;
+    background-color: #CADEFC;
 }
 
 .todo_list{
@@ -240,21 +240,35 @@ canvas {
 
     .todo_add {
         position: relative;
-        padding: 5%;
-        height: auto;
+        height: 90px;
+        padding: 0;
     }
 
     .todo_add>input[type='text']{
-        width: 80%;
-        padding: 6px 7px;
+        position: absolute;
+        top: 50%;
+        left: 20px;
+        transform: translate(0, -50%);
+        width: 73%;
+        height: 33px;
+        padding: 7px 7px;
         font-size: 16px;
         border: 1px solid #B9BBDF;
         border-radius: 3px;
         outline: 0;    
-        vertical-align: middle;
     }
-    .todo_add>button{
-        margin: 0 0 0 7%;
+
+    .insert_btn{
+        position: absolute;
+        display: inline-block;
+        top: 50%;
+        right: 20px;
+        transform: translate(0, -50%);
+        width: 38px;
+        height: 38px;
+        line-height: 38px;
+        margin: 0;
+        padding: 0;
         border-radius: 50%;
     }
 

@@ -14,7 +14,7 @@ module.exports = {
     output:{// 최종적으로 만들어질 js
         path: path.join(__dirname, '/dist'), //빌드 위치
         filename : 'bundle.js',  //웹팩 빌드 후 최종적으로 만들어질 파일
-        publicPath: './', //서버 배포했을때 필요
+        //publicPath: '../dist/', //*********** 서버 배포할때 주석제거 ***********//
     },
     module : { //모듈 연결 설정
         rules : [{
@@ -41,7 +41,7 @@ module.exports = {
         compress: true,
         contentBase: './dist',
         hot : true,
-        port: 9000,
+        port: 9001,
     },
     plugins: [
         new HtmlWebpackPlugin({

@@ -28,7 +28,7 @@ const Todo_Add = memo(({todo_add}) =>{
         <React.Fragment>
             <form className="todo_add">
                 <input type="text" className="todo_input" onChange={onchange_input} ref={input_txt}/>
-                <button className="insert_btn" onSubmit={onSubmit_todo} onClick={onSubmit_todo}>+</button>
+                <button className="insert_btn" onSubmit={onSubmit_todo} onClick={onSubmit_todo}></button>
             </form>
         </React.Fragment>
     );
