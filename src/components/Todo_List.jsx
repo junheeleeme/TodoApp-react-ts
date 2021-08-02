@@ -6,7 +6,6 @@ const Todo_List = memo( ({todos, doneToggle, todo_edit, todo_delete}) => {
 
     const [edit, setEdit] = useState('');
     const todo_list = useRef();
-    const list_li = useRef();
 
     const onClick_del = (e) => {
         e.preventDefault();
