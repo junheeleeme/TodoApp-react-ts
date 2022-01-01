@@ -8,3 +8,6 @@
 ## Initial Screen
 
 ![todo](https://user-images.githubusercontent.com/38034518/122686871-7d83be00-d24e-11eb-9215-f48450818d24.png)
+
+![simple-react-board_play](https://user-images.githubusercontent.com/38034518/147850020-d8ced3b0-775e-4749-bc36-8c85303300d0.gif)
+
