@@ -1,7 +1,7 @@
 ![Todo List(Functional Components)](https://user-images.githubusercontent.com/38034518/153415849-1197d26d-36de-442d-8c55-c7ed4c049ef8.png)
 
 
-# Todo List(Used Functional Components)  --> [Link](https://www.juni-official.com/todo-hooks)
+# Todo List(Used Functional Components)  --> [Link](https://www.juni-official.com/portfolio/todo-hooks/index.html)
 
 * 리액트 함수형 컴포넌트 사용
 * Webpack/babel 사용
