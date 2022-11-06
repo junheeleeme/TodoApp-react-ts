@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    /* 기본 옵션
+        // "incremental": true,                   /* 증분 컴파일 활성화 */
+    "esModuleInterop": true /* 모든 가져오기에 대한 네임스페이스 객체 생성을 통해 CommonJS와 ES 모듈 간의 상호 운용성을 제공. 'allowSyntheticDefaultImports' 암시 */,
+    "sourceMap": true /* 소스맵 '.map' 파일 생성 설정 */,
+    "lib": ["ES2020", "DOM"] /* 컴파일 과정에 사용될 라이브러리 파일 설정 */,
+    "jsx": "react-jsx" /* 생성될 JSX 코드 설정: 'preserve', 'react-native', or 'react'. */,
+    "target": "es5" /* ECMAScript 목표 버전 설정: 'ES3'(기본), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */,
+    "module": "ESNext" /* 생성될 모듈 코드 설정: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */,
+    "moduleResolution": "Node",
+    "strict": true, // 타입스크립트 규칙 엄격하게 적용
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
