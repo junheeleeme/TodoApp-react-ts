@@ -1,275 +1,72 @@
 @charset "utf-8";
 
-*{
-    box-sizing: border-box;
-    user-select: none;
+* {
+  box-sizing: border-box;
+  user-select: none;
 }
 
-ul{
-    list-style: none;
-    padding: 0;
-    margin: 0;
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-	margin: 0;	
-	background: #bdc3c7;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #2c3e50, #bdc3c7);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: #bdc3c7; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #2c3e50, #bdc3c7); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 canvas {
-	display: block;
+  display: block;
 }
 
 #particles-js {
-    display: block;
-	position: relative;
-	width: 100%;
-	height: 100%;
-    z-index: -9999;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -9999;
 }
 
-#root{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    height: 600px;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-    z-index: 999;
+#root {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 700px;
+  border-radius: 8px;
+  background-color: #fff;
+  z-index: 999;
+  overflow: auto;
 }
 
-.todo_header{
-    position: relative;
-    height: 50px;
-    background-color: #DBE2EF;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-
-.todo_header>h1{
-    position: absolute;
-    top: 53%; left: 50%;
-    transform: translate(-50%, -50%);
-    display: inline-block;
-    padding: 0;
-    margin: 0;
-    font-size: 23px;
-    color: #374045;
-}
-
-.todo_main{
-    width: 100%;
-    height: 100%;
-}
-
-.todo_add{
-    position: relative;
-    padding: 20px;
-    height: 70px;
-}
-
-.todo_add>input[type='text']{
-    width: 83%;
-    height: 30px;
-    padding: 2px 0 0 5px;
-    font-size: 16px;
-    border: 1px solid #B9BBDF;
-    border-radius: 3px;
-    outline: 0;    
-    vertical-align: top;
-}
-
-.insert_btn{
-    width: 32px;
-    height: 32px;
-    margin-left: 7%;
-    border-radius: 50%;
-    font-size: 25px;
-    color: #fff;
-    border: none;
-    outline: 0;
-    cursor: pointer;
-    transition: 0.3s ease;
-    background-color: #CADEFC;
-    background: url('../src/image/plus.png') no-repeat center / 50%, #EDF6E5;
-}
-
-.todo_add>button:hover{
-    background-color: #CADEFC;
-}
-
-.todo_list{
-    height: calc(100% - 122px);
-    border-top: 1px solid #E8E8E8;
-    overflow: scroll;
-}
-
-.todo_list>li{
-    position: relative;
-    height: 45px;
-    font-size: 16px;
-    border-bottom: 1px solid #E1E5EA;
-    cursor: pointer;
-}
-
-.todo_list>li:hover{
-    background: #EEEEEE;
-}
-
-.done{
-    background: #e4e9f2 !important;
-}
-
-.todo_list>li:hover .todo_date{
-    opacity: 0;
-}
-
-.todo_list>li:after{
-    content: '';
-    position: absolute;
-    top: 50%; left: 15px;
-    transform : translate(0, -50%);
-    width: 15px;
-    height: 15px;
-    border: 1px solid #9896F1;
-}
-
-.todo_list>li:before{
-    content: '';
-    position: absolute;
-    top: 50%; left: 18px;
-    transform : translate(0, -50%);
-    width: 11px;
-    height: 11px;
-    background-color: #fff;
-    transition:0.3s ease;
-}
-
-.todo_list>li.done:before{
-    background-color: #9896F1;
-}
-
-.todo_title{
-    display: inline-block;
-    padding: 14px 5px 14px 45px;
-    margin: 0;
-    width: 80%;
-    height: 100%;
-    overflow:hidden; 
-    text-overflow:ellipsis; 
-    white-space:nowrap;
-}
-
-.todo_date{
-    position: absolute;
-    bottom: 3px;
-    right: 7px;
-    font-size: 10px;
-    opacity: 1;
-    transition: 0.3s ease;
-}
-
-.done{
-    text-decoration: line-through;
-}
-
-.edit_btn{
-    position: absolute;
-    top: 50%; right: 50px;
-    transform: translate(0, -50%);
-    width: 30px;
-    height: 30px;
-    display: inline-block;
-    transition: 0.2s ease;
-    opacity: 0;
-    background: url('../src/image/edit.png') no-repeat center / 80%;
-}
-
-.del_btn{
-    position: absolute;
-    top: 50%; right: 15px;
-    transform: translate(0, -50%);
-    width: 30px;
-    height: 30px;
-    display: inline-block;
-    transition: 0.2s ease;
-    opacity: 0;
-    background: url('../src/image/delete.png') no-repeat center / 85%;  
-}
-
-.todo_list>li:hover .edit_btn, .todo_list>li:hover .del_btn{
-    opacity: 1;
-    z-index: 1;    
-}
-
-.todo_edit{
+@media screen and (max-width: 480px) {
+  #particles-js {
     display: none;
-    position: absolute;
-    top: 50%; left: 40px;
-    transform: translate(0, -50%);
-    width: 68%;
-    height: 30px;
-    padding: 3px 0 0 5px;
-    font-size: 16px;
-    border: 1px solid #B9BBDF;
-    border-radius: 3px;
-    outline: 0;    
-}
-
-.edit .todo_edit{
-    display: block;
-} 
-
-@media screen and (max-width: 450px) {
-
-    #root{
-        position: absolute;
-        top: 0;
-        left: 0;
-        transform: none;
-        width: 100vw;
-        height: 100vh;
-        border-radius: 0px;
-        background-color: #fff;
-        z-index: 999;
-    }
-
-    .todo_add {
-        position: relative;
-        height: 90px;
-        padding: 0;
-    }
-
-    .todo_add>input[type='text']{
-        position: absolute;
-        top: 50%;
-        left: 20px;
-        transform: translate(0, -50%);
-        width: 73%;
-        height: 33px;
-        padding: 7px 7px;
-        font-size: 16px;
-        border: 1px solid #B9BBDF;
-        border-radius: 3px;
-        outline: 0;    
-    }
-
-    .insert_btn{
-        position: absolute;
-        display: inline-block;
-        top: 50%;
-        right: 20px;
-        transform: translate(0, -50%);
-        width: 38px;
-        height: 38px;
-        line-height: 38px;
-        margin: 0;
-        padding: 0;
-        border-radius: 50%;
-    }
-
+  }
+  #root {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: 100vh;
+    transform: none;
+    border-radius: 0;
+    background-color: #fff;
+    box-shadow: none;
+  }
 }

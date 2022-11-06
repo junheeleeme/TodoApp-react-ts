@@ -11,6 +11,8 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 // 개발모드 유무
 const isDev = process.env.NODE_ENV !== 'production'
 const envPath = `./.env.${isDev ? 'development' : 'production'}`
+dotenv.config({ path: envPath }) // template Title에 필요
+
 console.log(`💻💻💻💻💻💻💻💻💻💻💻💻💻💻 ${isDev ? '[ Dev Mode ]' : '[ Product Mode ]'} 💻💻💻💻💻💻💻💻💻💻💻💻💻💻`)
 
 const config = {
