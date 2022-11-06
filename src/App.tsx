@@ -18,13 +18,7 @@ interface todoProp {
   isUpdate: boolean
 }
 
-interface MutableRefObject<T> {
-  current: T
-}
-
 const App = () => {
-  const todoRef = useRef<HTMLDivElement>(null)
-  const updateRef = useRef<HTMLDivElement>(null)
   const [todos, setTodos] = useState<Array<todoProp>>([])
   const [todoInput, setTodoInput] = useState<string>('')
   const [todoUpdate, setTodoUpdate] = useState<string>('')
@@ -32,7 +26,6 @@ const App = () => {
 
   useEffect(() => {
     defaultSet()
-    console.log(typeof todoRef.current)
   }, [])
 
   useEffect(() => {
@@ -46,7 +39,16 @@ const App = () => {
   // 기존 데이터 체크해서 default setting
   const defaultSet = useCallback(() => {
     const todoList: null | string = window.localStorage.getItem('todo')
-    if (todoList !== null) setTodos(JSON.parse(todoList))
+    if (todoList !== null) {
+      const list = JSON.parse(todoList)
+      // 수정모드 전체 해제
+      setTodos(
+        list.map((li: todoProp) => {
+          li.isUpdate = false
+          return li
+        })
+      )
+    }
   }, [])
 
   const todoChange = (e: React.ChangeEvent<HTMLInputElement>) => setTodoInput(e.target.value)
@@ -178,7 +180,7 @@ const App = () => {
           {/* 추가 인풋창 */}
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
             <TextField
-              ref={todoRef}
+              autoFocus
               fullWidth
               size="small"
               label="Todo"
@@ -200,7 +202,7 @@ const App = () => {
                 <ListItemIcon sx={{ mr: -2 }}>{todo.isDone ? <CheckCircleIcon sx={{ color: '#54B435' }} /> : <CheckCircleOutlineIcon sx={{ color: '#B2B2B2' }} />}</ListItemIcon>
                 <IconButton edge="end" aria-label="delete"></IconButton>
                 {todo.isUpdate ? (
-                  <Input ref={updateRef} fullWidth value={todoUpdate} onChange={updateChange} onKeyDown={(e) => downUpdateKey(e, todo.id)} onClick={(e) => e.stopPropagation()} />
+                  <Input fullWidth value={todoUpdate} autoFocus onChange={updateChange} onKeyDown={(e) => downUpdateKey(e, todo.id)} onClick={(e) => e.stopPropagation()} />
                 ) : (
                   <ListItemText primary={todo.todo} secondary={todo.date} sx={{ margin: 0 }} />
                 )}
