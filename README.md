@@ -1,10 +1,12 @@
-![Todo List(Functional Components)](https://user-images.githubusercontent.com/38034518/153415849-1197d26d-36de-442d-8c55-c7ed4c049ef8.png)
+![꾸생의TodoList](https://user-images.githubusercontent.com/38034518/200177644-43505991-1dda-4030-aa5e-99002ace6813.png)
 
-
-# Todo List(Used Functional Components)  --> [Link](https://www.juni-official.com/portfolio/todo-hooks/index.html)
+# 꾸생의 TodoList
 
 * 리액트 함수형 컴포넌트 사용
-* Webpack/babel 사용
+* Webpack/babel 수동설정 
+* TypeScript 적용(2022-11-06)
+* MUI 적용 및 리팩토링(2022-11-06)
+
 
 ### 클래스형 컴포넌트를 사용한 Todo List --> [Link](https://github.com/junheeleeme/React_todoApp)
 
