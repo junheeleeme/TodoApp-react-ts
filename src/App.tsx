@@ -20,9 +20,11 @@ interface todoProp {
 
 const App = () => {
   const [todos, setTodos] = useState<Array<todoProp>>([])
-  const [todoInput, setTodoInput] = useState<string>('')
-  const [todoUpdate, setTodoUpdate] = useState<string>('')
-  const notify = () => toast('할 일을 입력해주세요!', { position: 'bottom-center', autoClose: 1500, theme: 'dark' })
+  const todoRef = useRef<HTMLInputElement>(null)
+  const updateRef = useRef<HTMLInputElement>(null)
+  // const [todoInput, setTodoInput] = useState<string>('')
+
+  const notify = () => toast('할 일을 입력해주세요!', { position: 'top-right', autoClose: 1500, theme: 'dark' })
 
   useEffect(() => {
     defaultSet()
@@ -51,33 +53,37 @@ const App = () => {
     }
   }, [])
 
-  const todoChange = (e: React.ChangeEvent<HTMLInputElement>) => setTodoInput(e.target.value)
-  const updateChange = (e: React.ChangeEvent<HTMLInputElement>) => setTodoUpdate(e.target.value)
-
   // UX 이벤트 함수: Todo 추가 Input 박스
   const downEnterESC = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    e.keyCode === 13 && addTodo()
-    e.keyCode === 27 && setTodoInput('')
+    if (todoRef.current) {
+      if (e.keyCode === 13) addTodo()
+      if (e.keyCode === 27) todoRef.current.value = ''
+    }
   }
   // UX 이벤트 함수: Todo 업데이트 Input 박스
   const downUpdateKey = (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>, id: string) => {
-    e.keyCode === 27 && setTodoUpdate('')
-    e.keyCode === 13 && updateTodo(id)
+    if (updateRef.current) {
+      if (e.keyCode === 27) updateRef.current.value = ''
+      if (e.keyCode === 13) updateTodo(id)
+    }
   }
 
   // Todo 추가
-  const addTodo = useCallback(() => {
-    if (todoInput.trim() !== '') {
-      setTodos((prev) => {
-        return prev.concat({ id: Math.random().toString(), todo: todoInput, date: getDateNow(), isDone: false, isUpdate: false })
-      })
-      // Todo 추가 후 Input Box 비우기
-      setTodoInput('')
-    } else {
-      setTodoInput('')
-      notify()
+  const addTodo = () => {
+    if (todoRef.current) {
+      const todoTxt = todoRef.current.value.trim()
+      if (todoTxt !== '') {
+        setTodos((prev) => {
+          return prev.concat({ id: Math.random().toString(), todo: todoTxt, date: getDateNow(), isDone: false, isUpdate: false })
+        })
+        // Todo 추가 후 Input Box 비우기
+        todoRef.current.value = ''
+      } else {
+        todoRef.current.value = ''
+        notify()
+      }
     }
-  }, [todoInput])
+  }
 
   // Todo 삭제
   const removeTodo = (e: React.MouseEvent, id: string) => {
@@ -88,19 +94,22 @@ const App = () => {
 
   // Todo 업데이트
   const updateTodo = (id: string) => {
-    if (todoUpdate.trim() !== '') {
-      setTodos((prev) =>
-        prev.map((p) => {
-          if (p.id === id) {
-            p.todo = todoUpdate
-            p.isUpdate = !p.isUpdate
-          }
-          return p
-        })
-      )
-    } else {
-      setTodoUpdate('')
-      notify()
+    if (updateRef.current) {
+      const updateTxt = updateRef.current.value.trim()
+      if (updateTxt !== '') {
+        setTodos((prev) =>
+          prev.map((p) => {
+            if (p.id === id) {
+              p.todo = updateTxt
+              p.isUpdate = !p.isUpdate
+            }
+            return p
+          })
+        )
+      } else {
+        updateRef.current.value = ''
+        notify()
+      }
     }
   }
 
@@ -115,7 +124,9 @@ const App = () => {
           if (p.id === id) {
             p.isUpdate = !p.isUpdate
             // todoUpdate: 수정 할 때 default 설정
-            setTodoUpdate(p.todo)
+            setTimeout(() => {
+              if (updateRef.current) updateRef.current.value = p.todo
+            }, 0)
           } else {
             p.isUpdate = false
           }
@@ -130,7 +141,7 @@ const App = () => {
   // Todo 업데이트 취소
   const cencelUpdate = (e: React.MouseEvent | null, id: string) => {
     e !== null && e.stopPropagation()
-    setTodoUpdate('')
+    if (updateRef.current) updateRef.current.value = ''
     setTodos((prev) =>
       prev.map((p) => {
         if (p.id === id) {
@@ -170,7 +181,7 @@ const App = () => {
 
   return (
     <>
-      <Card sx={{ height: '100%' }}>
+      <Card className="card-wrap">
         <CardContent sx={{ padding: '1rem', height: '100%', paddingTop: '4.75rem' }}>
           <AppBar position="fixed" sx={{ padding: '0.75rem 1rem', background: '#3C4048' }}>
             <Typography variant="h1" component="h1" fontSize={22} fontWeight={500} sx={{ margin: 0, padding: 0.5 }}>
@@ -179,30 +190,19 @@ const App = () => {
           </AppBar>
           {/* 추가 인풋창 */}
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-            <TextField
-              autoFocus
-              fullWidth
-              size="small"
-              label="Todo"
-              placeholder="할 일을 입력해주세요."
-              variant="outlined"
-              color="secondary"
-              value={todoInput}
-              onChange={todoChange}
-              onKeyDown={downEnterESC}
-            />
+            <TextField inputRef={todoRef} autoFocus fullWidth size="small" label="Todo" placeholder="할 일을 입력해주세요." variant="outlined" color="secondary" onKeyDown={downEnterESC} />
             <IconButton aria-label="delete" size="medium" onClick={addTodo} sx={{ marginLeft: '0.5rem' }}>
               <AddCircleOutlineIcon fontSize="inherit" />
             </IconButton>
           </Box>
           {/* 투두목록 */}
-          <List sx={{ p: 0 }}>
+          <List sx={{ p: 0 }} className="list-wrap">
             {todos.map((todo) => (
               <ListItemButton key={todo.id} selected={todo.isDone} component="li" data-target="isDone" onClick={(e) => doneToggle(e, todo.id)}>
                 <ListItemIcon sx={{ mr: -2 }}>{todo.isDone ? <CheckCircleIcon sx={{ color: '#54B435' }} /> : <CheckCircleOutlineIcon sx={{ color: '#B2B2B2' }} />}</ListItemIcon>
                 <IconButton edge="end" aria-label="delete"></IconButton>
                 {todo.isUpdate ? (
-                  <Input fullWidth value={todoUpdate} autoFocus onChange={updateChange} onKeyDown={(e) => downUpdateKey(e, todo.id)} onClick={(e) => e.stopPropagation()} />
+                  <Input inputRef={updateRef} fullWidth autoFocus onKeyDown={(e) => downUpdateKey(e, todo.id)} onClick={(e) => e.stopPropagation()} />
                 ) : (
                   <ListItemText primary={todo.todo} secondary={todo.date} sx={{ margin: 0 }} />
                 )}

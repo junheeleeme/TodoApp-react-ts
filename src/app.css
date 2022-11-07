@@ -31,6 +31,11 @@ canvas {
   display: block;
 }
 
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
 #particles-js {
   display: block;
   position: fixed;
@@ -41,16 +46,21 @@ canvas {
   z-index: -9999;
 }
 
-#root {
+.card-wrap {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 500px;
-  height: 700px;
+  height: auto;
   border-radius: 8px;
   background-color: #fff;
   z-index: 999;
+  overflow: auto;
+}
+
+.list-wrap {
+  height: 500px;
   overflow: auto;
 }
 
@@ -58,7 +68,7 @@ canvas {
   #particles-js {
     display: none;
   }
-  #root {
+  .card-wrap {
     position: relative;
     top: auto;
     left: auto;
