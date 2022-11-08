@@ -1,6 +1,6 @@
 ![꾸생의TodoList](https://user-images.githubusercontent.com/38034518/200177644-43505991-1dda-4030-aa5e-99002ace6813.png)
 
-# 꾸생의 TodoList
+# 꾸생의 TodoApp
 
 * 리액트 함수형 컴포넌트 사용(2011-06-21)
 * Webpack/babel 수동설정(2011-06-21)
