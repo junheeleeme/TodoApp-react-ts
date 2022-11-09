@@ -88,8 +88,9 @@ const App = () => {
   // Todo 삭제
   const removeTodo = (e: React.MouseEvent, id: string) => {
     e.stopPropagation()
-    const updateTodos = todos.filter((todo) => todo.id !== id)
-    setTodos([...updateTodos])
+    // const updateTodos = todos.filter((todo) => todo.id !== id)
+    // setTodos([...updateTodos])
+    setTodos((prev) => prev.filter((todo) => todo.id === id))
   }
 
   // Todo 업데이트
@@ -164,14 +165,11 @@ const App = () => {
     // _todos.splice(idx, 1, target)
     // setTodos([..._todos])
 
-    setTodos((prev) =>
-      prev.map((p) => {
-        if (p.id === id) {
-          p.isDone = !p.isDone
-        }
-        return p
-      })
-    )
+    setTodos((prev) => {
+      const target: todoProp | undefined = prev.find((p) => p.id === id)
+      if (target !== undefined) target.isDone = !target.isDone
+      return [...prev]
+    })
   }
 
   // 현재 시간 구하기
