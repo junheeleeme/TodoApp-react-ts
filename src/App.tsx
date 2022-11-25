@@ -90,7 +90,7 @@ const App = () => {
     e.stopPropagation()
     // const updateTodos = todos.filter((todo) => todo.id !== id)
     // setTodos([...updateTodos])
-    setTodos((prev) => prev.filter((todo) => todo.id === id))
+    setTodos((prev) => prev.filter((todo) => todo.id !== id))
   }
 
   // Todo 업데이트
@@ -183,7 +183,7 @@ const App = () => {
         <CardContent sx={{ padding: '1rem', height: '100%', paddingTop: '4.75rem' }}>
           <AppBar position="fixed" sx={{ padding: '0.75rem 1rem', background: '#3C4048' }}>
             <Typography variant="h1" component="h1" fontSize={22} fontWeight={500} sx={{ margin: 0, padding: 0.5 }}>
-              🔥 꾸생의 Todo App
+              🔥 Todo App
             </Typography>
           </AppBar>
           {/* 추가 인풋창 */}
