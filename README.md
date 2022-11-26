@@ -1,6 +1,6 @@
-![꾸생의TodoList](https://user-images.githubusercontent.com/38034518/200177644-43505991-1dda-4030-aa5e-99002ace6813.png)
+![image](https://user-images.githubusercontent.com/38034518/204080570-a5038aa3-c337-4b73-9d76-373ddd7bce86.png)
 
-# 꾸생의 TodoApp
+# Todo App => [Link](https://just-doit.web.app/)
 
 * 리액트 함수형 컴포넌트 사용(2011-06-21)
 * Webpack/babel 수동설정(2011-06-21)
@@ -10,7 +10,7 @@
 * MUI 적용 및 리팩토링(2022-11-06)
 
 
-### 클래스형 컴포넌트를 사용한 Todo List --> [Link](https://github.com/junheeleeme/React_todoApp)
+### 클래스형 컴포넌트를 사용한 Todo List --> [GitHub](https://github.com/junheeleeme/React_todoApp)
 
 ## Initial Screen
 
