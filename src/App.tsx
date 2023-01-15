@@ -164,6 +164,7 @@ const App = () => {
     <>
       <Card className="card-wrap">
         <CardContent sx={{ padding: '1rem', height: '100%', paddingTop: '4.75rem' }}>
+          {/* 헤더 */}
           <Header />
           {/* 추가 인풋창 */}
           <TodoInput todoRef={todoRef} addTodo={addTodo} downEnterESC={downEnterESC} />
