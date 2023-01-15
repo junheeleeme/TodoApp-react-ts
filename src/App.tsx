@@ -1,51 +1,44 @@
-import React from 'react'
-import moment from 'moment'
-import { Box, TextField, Input, AppBar, Card, CardContent, Typography, ListItemButton, List, ListItemIcon, ListItemText, IconButton } from '@mui/material'
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import EditIcon from '@mui/icons-material/Edit'
-import DeleteIcon from '@mui/icons-material/Delete'
-import ClearIcon from '@mui/icons-material/Clear'
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import { useState, useRef, useEffect, useCallback } from 'react'
+import { MutableRefObject } from 'react'
+
+import { TodoProps } from './type'
+import moment from 'moment'
+import { Card, CardContent } from '@mui/material'
+
 import { toast } from 'react-toastify'
 
-interface todoProp {
-  id: string
-  todo: string
-  date: string
-  isDone: boolean
-  isUpdate: boolean
-}
+import Header from './layout/header'
+import TodoInput from './layout/todoInput'
+import TodoList from './layout/todoList'
 
 const App = () => {
-  const [todos, setTodos] = useState<Array<todoProp>>([])
-  const todoRef = useRef<HTMLInputElement>(null)
-  const updateRef = useRef<HTMLInputElement>(null)
-  // const [todoInput, setTodoInput] = useState<string>('')
+  const [todos, setTodos] = useState<TodoProps[]>([])
+  const todoRef = useRef() as MutableRefObject<HTMLInputElement>
+  const updateRef = useRef() as MutableRefObject<HTMLInputElement>
 
-  const notify = () => toast('할 일을 입력해주세요!', { position: 'top-right', autoClose: 1500, theme: 'dark' })
+  const noInputNotify = () => toast('할 일을 입력해주세요!', { position: 'top-right', autoClose: 1500, theme: 'dark' })
 
   useEffect(() => {
-    defaultSet()
+    initialSetting()
   }, [])
 
   useEffect(() => {
-    saveLocal()
+    saveLocalStorage()
   }, [todos])
 
   // 로컬스토리지에 저장
-  const saveLocal = useCallback(() => {
+  const saveLocalStorage = useCallback(() => {
     window.localStorage.setItem('todo', JSON.stringify(todos))
   }, [todos])
+
   // 기존 데이터 체크해서 default setting
-  const defaultSet = useCallback(() => {
+  const initialSetting = useCallback(() => {
     const todoList: null | string = window.localStorage.getItem('todo')
     if (todoList !== null) {
       const list = JSON.parse(todoList)
       // 수정모드 전체 해제
       setTodos(
-        list.map((li: todoProp) => {
+        list.map((li: TodoProps) => {
           li.isUpdate = false
           return li
         })
@@ -80,7 +73,7 @@ const App = () => {
         todoRef.current.value = ''
       } else {
         todoRef.current.value = ''
-        notify()
+        noInputNotify()
       }
     }
   }
@@ -88,8 +81,6 @@ const App = () => {
   // Todo 삭제
   const removeTodo = (e: React.MouseEvent, id: string) => {
     e.stopPropagation()
-    // const updateTodos = todos.filter((todo) => todo.id !== id)
-    // setTodos([...updateTodos])
     setTodos((prev) => prev.filter((todo) => todo.id !== id))
   }
 
@@ -109,7 +100,7 @@ const App = () => {
         )
       } else {
         updateRef.current.value = ''
-        notify()
+        noInputNotify()
       }
     }
   }
@@ -157,16 +148,8 @@ const App = () => {
   const doneToggle = (e: React.MouseEvent, id: string) => {
     e.stopPropagation()
 
-    // 최적화(?)
-    // const _todos = todos
-    // const idx = _todos.findIndex((todo) => todo.id === id)
-    // const target = todos[idx]
-    // target.isDone = !target.isDone
-    // _todos.splice(idx, 1, target)
-    // setTodos([..._todos])
-
     setTodos((prev) => {
-      const target: todoProp | undefined = prev.find((p) => p.id === id)
+      const target: TodoProps | undefined = prev.find((p) => p.id === id)
       if (target !== undefined) target.isDone = !target.isDone
       return [...prev]
     })
@@ -181,45 +164,11 @@ const App = () => {
     <>
       <Card className="card-wrap">
         <CardContent sx={{ padding: '1rem', height: '100%', paddingTop: '4.75rem' }}>
-          <AppBar position="fixed" sx={{ padding: '0.75rem 1rem', background: '#3C4048' }}>
-            <Typography variant="h1" component="h1" fontSize={22} fontWeight={500} sx={{ margin: 0, padding: 0.5 }}>
-              🔥 Todo App
-            </Typography>
-          </AppBar>
+          <Header />
           {/* 추가 인풋창 */}
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-            <TextField inputRef={todoRef} autoFocus fullWidth size="small" label="Todo" placeholder="할 일을 입력해주세요." variant="outlined" color="secondary" onKeyDown={downEnterESC} />
-            <IconButton aria-label="delete" size="medium" onClick={addTodo} sx={{ marginLeft: '0.5rem' }}>
-              <AddCircleOutlineIcon fontSize="inherit" />
-            </IconButton>
-          </Box>
+          <TodoInput todoRef={todoRef} addTodo={addTodo} downEnterESC={downEnterESC} />
+          <TodoList todos={todos} updateRef={updateRef} doneToggle={doneToggle} updateMode={updateMode} downUpdateKey={downUpdateKey} cencelUpdate={cencelUpdate} removeTodo={removeTodo} />
           {/* 투두목록 */}
-          <List sx={{ p: 0 }} className="list-wrap">
-            {todos.map((todo) => (
-              <ListItemButton key={todo.id} selected={todo.isDone} component="li" data-target="isDone" onClick={(e) => doneToggle(e, todo.id)}>
-                <ListItemIcon sx={{ mr: -2 }}>{todo.isDone ? <CheckCircleIcon sx={{ color: '#54B435' }} /> : <CheckCircleOutlineIcon sx={{ color: '#B2B2B2' }} />}</ListItemIcon>
-                <IconButton edge="end" aria-label="delete"></IconButton>
-                {todo.isUpdate ? (
-                  <Input inputRef={updateRef} fullWidth autoFocus onKeyDown={(e) => downUpdateKey(e, todo.id)} onClick={(e) => e.stopPropagation()} />
-                ) : (
-                  <ListItemText primary={todo.todo} secondary={todo.date} sx={{ margin: 0 }} />
-                )}
-
-                <IconButton edge="end" aria-label="update" sx={{ marginRight: '0.15rem' }} onClick={(e) => updateMode(e, todo.id)}>
-                  <EditIcon />
-                </IconButton>
-                {todo.isUpdate ? (
-                  <IconButton edge="end" aria-label="clear" sx={{ marginRight: '0.15rem' }} onClick={(e) => cencelUpdate(e, todo.id)}>
-                    <ClearIcon />
-                  </IconButton>
-                ) : (
-                  <IconButton edge="end" aria-label="delete" sx={{ marginRight: '0.15rem' }} onClick={(e) => removeTodo(e, todo.id)}>
-                    <DeleteIcon />
-                  </IconButton>
-                )}
-              </ListItemButton>
-            ))}
-          </List>
         </CardContent>
       </Card>
     </>
